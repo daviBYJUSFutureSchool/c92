@@ -1,69 +1,58 @@
-
 var canvas = new fabric.Canvas('myCanvas');
 
-playerX = 10;
-playerY = 10;
+player_x = 10;
+player_y = 10;
 
-blockImageWidth = 30;
-blockImageHeight = 30;
+block_image_width = 30;
+block_image_height = 30;
 
-var playerObject= "";
-var blockImageObject= "";
+var player_object= "";
+var block_image_object= "";
 
-function playerUpdate()
+function player_update()
 {
 	fabric.Image.fromURL("jogador.png", function(Img) {
-	playerObject = Img;
-
-	playerObject.scaleToWidth(150);
-	playerObject.scaleToHeight(140);
-	playerObject.set({
-	top:playerY,
-	left:playerX
-	});
-	canvas.add(blockImageObject);
-
+	player_object = Img;
+	player_object.scaleToWidth(100);
+	player_object.scaleToHeight(110);
+	player_object.set({top:player_y,left:player_x});
+	canvas.add(player_object);
 	});
 }
 
-function newImage(getImage)
+function new_image(get_image)
 {
-	fabric.Image.fromURL(getImage, function(Img) {
-	blockImageObject = Img;
-
-	blockImageObject.scaleToWidth(blockImageWidth);
-	blockImageObject.scaleToHeight(blockImageHeight);
-	blockImageObject.set({
-	top:playerY,
-	left:playerX
-	});
-	canvas.add(blockImageObject);
-
+	fabric.Image.fromURL(get_image, function(Img) {
+	block_image_object = Img;
+	block_image_object.scaleToWidth(block_image_width);
+	block_image_object.scaleToHeight(block_image_height);
+	block_image_object.set({top:player_y,left:player_x});
+	canvas.add(block_image_object);
 	});
 
 }
 
-window.addEventListener("keydown", myKeyDown);
+window.addEventListener("keydown", my_keydown);
 
-function myKeyDown(e)
+function my_keydown(e)
 {
 keyPressed = e.keyCode;
 console.log(keyPressed);
 if(e.shiftKey == true && keyPressed == '69')
 {
-	console.log("E e shift pressionadas juntas");
-	blockImageWidth = blockImageWidth + 10;
-	blockImageHeight = blockImageHeight + 10;
-	document.getElementById("currentWidth").innerHTML = blockImageWidth;
-	document.getElementById("currentHeight").innerHTML = blockImageHeight;	
+	console.log("E e Shift pressionadas ao mesmo tempo");
+	block_image_width = block_image_width + 10;
+	block_image_height = block_image_height + 10;
+	document.getElementById("currentWidth").innerHTML = block_image_width;
+	document.getElementById("currentHeight").innerHTML = block_image_height;	
 }
 if(e.shiftKey && keyPressed == '81')
 {
-	console.log("Q e shift pressionadas juntas");
-	blockImageWidth = blockImageWidth - 10;
-	blockImageHeight = blockImageHeight - 10;
-	document.getElementById("currentWidth").innerHTML = blockImageWidth;
-	document.getElementById("currentHeight").innerHTML = blockImageHeight;
+	console.log("Q e Shift pressionadas ao mesmo tempo");
+	block_image_width = block_image_width - 10;
+	block_image_height = block_image_height - 10;
+	document.getElementById("currentWidth").innerHTML = block_image_width;
+	document.getElementById("currentHeight").innerHTML = block_image_height;
 }
 
 	if(keyPressed == '38')
@@ -86,89 +75,88 @@ if(e.shiftKey && keyPressed == '81')
 		right();
 		console.log("direita");
 	}
-	if(keyPressed == '87')
+	if(keyPressed == '80')
 	{
-		newImage('88bae0c349f7417f64658ff971451e2b5df46009.jpeg'); 
-		console.log("w");
+		new_image('88bae0c349f7417f64658ff971451e2b5df46009.jpeg'); 
+		console.log("p");
 	}
 	if(keyPressed == '71')
 	{
-		newImage('8517e6c1fe3c561a3d2c14f7c907ef54fb303ab2.png'); 
+		new_image('8517e6c1fe3c561a3d2c14f7c907ef54fb303ab2.png'); 
 		console.log("g");
 	}
-	if(keyPressed == '76')
+	if(keyPressed == '86')
 	{
-		newImage('download (2).jpg'); 
-		console.log("l");
+		new_image('download (2).jpg'); 
+		console.log("v");
+	}
+	if(keyPressed == '77')
+	{
+		new_image('download (4).jpg'); 
+		console.log("m");
 	}
 	if(keyPressed == '84')
 	{
-		newImage('download (4).jpg'); 
+		new_image('download (5).jpg'); 
 		console.log("t");
 	}
-	if(keyPressed == '82')
+	if(keyPressed == '65')
 	{
-		newImage('download (5).jpg'); 
-		console.log("r");
+		new_image('download (6).jpg'); 
+		console.log("a");
 	}
-	if(keyPressed == '89')
+	if(keyPressed == '90')
 	{
-		newImage('download (6).jpg'); 
-		console.log("y");
-	}
-	
-	if(keyPressed == '85')
-	{
-		newImage('e61eae8e2c6eb2db5fe13ff03ad5fd727f2769b3_2_500x500.png'); 
-		console.log("u");
+		new_image('e61eae8e2c6eb2db5fe13ff03ad5fd727f2769b3_2_500x500.png'); 
+		console.log("z");
 	}
 	
 	
 }
 function up()
 {
-	if(playerY >=0)
+	if(player_y >=0)
 	{
-		playerY = playerY - blockImageHeight;
-		console.log("autura da imagem do bloco = " + blockImageHeight);
-		console.log("Quando a tecla direcional Cima for pressionada, X =  " + playerX + " , Y = "+playerY);
-		canvas.remove(playerObject);
-		playerUpdate();
+		player_y = player_y - block_image_height;
+		console.log("altura da imagem do bloco = " + block_image_height);
+		console.log("Quando a seta para cima é pressionada, X =  " + player_x + " , Y = "+player_y);
+		canvas.remove(player_object);
+		player_update();
 	}
 }
 
 function down()
 {
-	if(playerY <=500)
+	if(player_y <=500)
 	{
-		playerY = playerY + blockImageHeight;
-		console.log("altura da imagem do bloco = " + blockImageHeight);
-		console.log("Quando a tecla direcional Baixo for pressionada, X =  " + playerX + " , Y = "+playerY);
-		canvas.remove(playerObject);
-		playerUpdate();
+		player_y = player_y + block_image_height;
+		console.log("altura da imagem do bloco = " + block_image_height);
+		console.log("Quando a seta para baixo é pressionada, X =  " + player_x + " , Y = "+player_y);
+		canvas.remove(player_object);
+		player_update();
 	}
 }
 
 function left()
 {
-	if(playerX >0)
+	if(player_x >0)
 	{
-		playerX = playerX - blockImageWidth;
-		console.log("largura da imagem do bloco = " + blockImageWidth);
-		console.log("Quando a tecla direcional Esquerda for pressionada, X =  " + playerX + " , Y = "+playerY);
-		canvas.remove(playerObject);
-		playerUpdate();
+		player_x = player_x - block_image_width;
+		console.log("largura da imagem do bloco = " + block_image_width);
+		console.log("Quando a seta esquerda é pressionada, X =  " + player_x + " , Y = "+player_y);
+		canvas.remove(player_object);
+		player_update();
 	}
 }
 
 function right()
 {
-	if(playerX <=850)
+	if(player_x <=850)
 	{
-		playerX = playerX + blockImageWidth;
-		console.log("largura da imagem do bloco = " + blockImageWidth);
-		console.log("Quando a tecla direcional Direita for pressionada, X =  " + playerX + " , Y = "+playerY);
-		canvas.remove(playerObject);
-		playerUpdate();
+		player_x = player_x + block_image_width;
+		console.log("largura da imagem do bloco = " + block_image_width);
+		console.log("Quando a seta direita é pressionada, X =  " + player_x + " , Y = "+player_y);
+		canvas.remove(player_object);
+		player_update();
 	}
 }
